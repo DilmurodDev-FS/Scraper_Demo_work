@@ -1,0 +1,17 @@
+{% extends 'scraper/base.html' %}
+{% block title %}Login | ScraperDash{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <div class="panel">
+      <h1>Login</h1>
+      {% if form.errors %}<div class="message error">Invalid username or password.</div>{% endif %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

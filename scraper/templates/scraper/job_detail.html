@@ -1,0 +1,56 @@
+{% extends 'scraper/base.html' %}
+{% block title %}Job #{{ job.id }} | ScraperDash{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="dashboard-head">
+      <div>
+        <span class="badge">Job #{{ job.id }}</span>
+        <h1>{{ job.title|default:"Scrape result" }}</h1>
+        <p class="truncate">{{ job.url }}</p>
+      </div>
+      <a class="btn" href="{% url 'export_job_csv' job.id %}">Export CSV</a>
+    </div>
+
+    {% if job.status == 'failed' %}
+      <div class="message error">{{ job.error_message }}</div>
+    {% else %}
+      <div class="cards">
+        <div class="card"><h3>{{ job.h1_count }}</h3><p>H1 headings</p></div>
+        <div class="card"><h3>{{ job.h2_count }}</h3><p>H2 headings</p></div>
+        <div class="card"><h3>{{ job.link_count }}</h3><p>Links found</p></div>
+      </div>
+
+      <div class="panel">
+        <h2>Meta description</h2>
+        <p>{{ job.meta_description|default:"No meta description found." }}</p>
+      </div>
+
+      <div class="panel">
+        <h2>Headings</h2>
+        {% if job.headings.all %}
+          {% for heading in job.headings.all %}
+            <div class="list-item"><strong>{{ heading.tag }}</strong> {{ heading.text }}</div>
+          {% endfor %}
+        {% else %}
+          <p>No headings found.</p>
+        {% endif %}
+      </div>
+
+      <div class="panel">
+        <h2>Links</h2>
+        {% if job.links.all %}
+          {% for link in job.links.all %}
+            <div class="list-item">
+              <strong>{{ link.text|default:"Untitled link" }}</strong><br>
+              <a class="truncate block" href="{{ link.href }}" target="_blank" rel="noopener">{{ link.href }}</a>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No links found.</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

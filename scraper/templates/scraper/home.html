@@ -1,0 +1,45 @@
+{% extends 'scraper/base.html' %}
+{% block title %}ScraperDash | Portfolio Scraper{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Django • Scraping • CSV Export</span>
+      <h1>Turn any web page into useful structured data.</h1>
+      <p>Scrape page titles, meta descriptions, headings and links. Save history and export results as CSV.</p>
+      <div class="actions">
+        <a class="btn" href="{% url 'register' %}">Start Scraping</a>
+        <a class="btn ghost" href="{% url 'login' %}">Login</a>
+      </div>
+    </div>
+    <div class="preview-card">
+      <div class="preview-top"></div>
+      <div class="fake-line w90"></div>
+      <div class="fake-line w70"></div>
+      <div class="fake-line w55"></div>
+      <div class="stats">
+        <div><strong>100</strong><span>Links max</span></div>
+        <div><strong>CSV</strong><span>Export</span></div>
+        <div><strong>Safe</strong><span>Timeouts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cards">
+    <div class="card">
+      <h3>URL Scraping</h3>
+      <p>Enter a target URL and extract basic page intelligence.</p>
+    </div>
+    <div class="card">
+      <h3>History</h3>
+      <p>Every scraping job is saved per user account.</p>
+    </div>
+    <div class="card">
+      <h3>CSV Export</h3>
+      <p>Download a single job or full history as CSV.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
